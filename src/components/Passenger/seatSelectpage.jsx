@@ -20,9 +20,11 @@ function SeatSelectPage() {
   }
 
   const reservedSeats = ["2C", "3D", "4E"];
+  const bookedSeats =["1A", "3A"];
 
   const handleSeatSelect = (selectedSeats) => {
     console.log("Selected seats:", selectedSeats);
+    setSelectedSeats(selectedSeats);
   };
 
   return (

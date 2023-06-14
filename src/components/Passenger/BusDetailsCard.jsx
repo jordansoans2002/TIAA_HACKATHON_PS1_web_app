@@ -43,7 +43,7 @@ const BusDetailsCard = ({ singleBusDetails }) => {
                 <div className="w-32">
                     <h1 className="text-2xl font-black font-bold">Seats available</h1>
                     <p>{singleBusDetails.availablity}</p>
-                    <Link to="/seatSelect" className="mt-4 btn btn-sm">
+                    <Link to="/seatSelect" busDetails={singleBusDetails} className="mt-4 btn btn-sm">
                         View Seats
                     </Link>
                 </div>

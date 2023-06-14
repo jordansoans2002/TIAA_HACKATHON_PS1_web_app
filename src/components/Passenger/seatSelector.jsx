@@ -1,12 +1,15 @@
+import { BookSharp } from "@mui/icons-material";
 import { useState } from "react";
 
 function SeatSelector(props) {
-    const { seats, reservedSeats, onSelect } = props;
+    const { seats, reservedSeats, bookedSeats, onSelect } = props;
     const [selectedSeats, setSelectedSeats] = useState([]);
 
     const handleSeatSelect = (seat) => {
         if (reservedSeats.includes(seat)) {
             alert("This seat is already reserved.");
+        } else if (bookedSeats.includes(seat)) {
+            alert("This seat is already booked.");
         } else if (selectedSeats.includes(seat)) {
             setSelectedSeats(selectedSeats.filter((s) => s !== seat));
         } else {
@@ -16,6 +19,8 @@ function SeatSelector(props) {
 
     const getSeatClass = (seat) => {
         if (reservedSeats.includes(seat)) {
+            return "bg-violet-300 cursor-not-allowed";
+        }else if (bookedSeats.includes(seat)) {
             return "bg-gray-300 cursor-not-allowed";
         } else if (selectedSeats.includes(seat)) {
             return "bg-yellow-400";
@@ -24,20 +29,20 @@ function SeatSelector(props) {
         }
     };
 
-    var availableSeats = seats.length * seats[0].length - (reservedSeats.length + selectedSeats.length);
+    var availableSeats = seats.length * seats[0].length - (reservedSeats.length + selectedSeats.length );
 
     return (
         <div className='container mx-auto p-10'>
-            <div className="w-full max-w-5xl mx-auto px-4 shadow-lg border-primary">
+            <div className="w-full max-w-xs mx-auto px-4 shadow-lg border-primary">
                 <h3 className="text-2xl font-bold mb-4">Select your seats:</h3>
                 <p className="text-xl font-bold m-2 text-primary text-center">Front</p>
-                <div className="grid grid-cols-5 gap-4">
+                <div className="grid grid-cols-5 gap-2">
                     {seats.map((row, rowIndex) => (
                         <div key={rowIndex} className="flex flex-col">
                             {row.map((seat, seatIndex) => (
                                 <button
                                     key={seatIndex}
-                                    className={`m-2 p-4 rounded-md ${getSeatClass(
+                                    className={`m-1 p-1 rounded-md ${getSeatClass(
                                         seat
                                     )} text-white`}
                                     disabled={reservedSeats.includes(seat)}
